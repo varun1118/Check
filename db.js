@@ -2,7 +2,7 @@ const Sequlize=require('sequelize')
 
 const db =  new Sequlize({
     dialect:'sqlite',
-    storage:__dirname+'test.db'
+    storage:__dirname+'/test.db'
 })
 
 const Tasks=db.define('task',{
