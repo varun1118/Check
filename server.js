@@ -4,6 +4,9 @@ const app=express()
 
 const { db, Tasks}=require('./db')
 
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+
 app.get('/tasks',async (req,res)=>{
      res.send( await Tasks.findAll())
 })
