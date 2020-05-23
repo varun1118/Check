@@ -2,12 +2,23 @@ const express= require('express')
 
 const app=express()
 
+const { db, Tasks}=require('./db')
+
+app.get('/tasks',async (req,res)=>{
+     res.send( await Tasks.findAll())
+})
+
+app.post('/tasks',async (req,res)=>{
+    res.send(await Tasks.create(req.body))
+})
+
 const PORT =process.env.PORT || 4444
 
-app.get('/',(req,res)=>{
-    res.send('HELLO WORLD')
-})
+app.use('/',express.static(__dirname+'/public'))
 
-app.listen(PORT,()=>{
-    console.log(`http://localhost:${PORT}`)
-})
+db.sync()
+    .then(()=>{
+        app.listen(PORT,()=>{
+            console.log(`http://localhost:${PORT}`)
+        })
+    })
