@@ -1,10 +1,17 @@
 const Sequlize=require('sequelize')
 
-const db =  new Sequlize({
-    dialect:'sqlite',
-    storage:__dirname+'/test.db'
-})
-
+const db;
+if(process.env.DATABASE_URL)
+{
+    db=new Sequlize(process.env.DATABASE_URL)
+}
+else{
+    db =  new Sequlize({
+        dialect:'sqlite',
+        storage:__dirname+'/test.db'
+    })    
+}
+ 
 const Tasks=db.define('task',{
     id:{
         type: Sequlize.DataTypes.INTEGER,
