@@ -1,6 +1,6 @@
 const Sequlize=require('sequelize')
 
-const db;
+let db;
 if(process.env.DATABASE_URL)
 {
     db=new Sequlize(process.env.DATABASE_URL)
